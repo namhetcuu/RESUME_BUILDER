@@ -53,7 +53,7 @@
   }
   
   .btn-small-light {
-    @apply flex items-center gap-2 text-[12px] font-semibold text-purple-800 bg-purple-600/15 border border-purple-50 px-3 py-1.5 rounded cursor-pointer;
+    @apply flex items-center gap-2 text-[12px] font-semibold text-purple-800 bg-purple-600/15 border border-purple-50 hover:border-purple-400 px-3 py-1.5 rounded cursor-pointer;
   }
   
   .form-input {
