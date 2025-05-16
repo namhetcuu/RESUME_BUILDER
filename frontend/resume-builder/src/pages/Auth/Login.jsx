@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
+import { validateEmail } from '../../utils/helper';
 
 const Login = ({setCurrentPage}) => {
   const [email, setEmail] = React.useState("");
@@ -10,6 +11,26 @@ const Login = ({setCurrentPage}) => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if(!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    if(!password){
+      setError("Please enter a password");
+      return;
+    }
+
+    setError(null);
+    //login API call
+    try {
+      
+    } catch (error) {
+      console.log(error);
+      setError("Something went wrong. Please try again.");
+      
+    }
   }
   return (
     <div className='w-[90vw] md:w-[33vw] flex flex-col p-7 justify-center'>
@@ -27,7 +48,17 @@ const Login = ({setCurrentPage}) => {
           placeholder='Enter your email address'
           required
         />
-        {error && <p className='text-red-500'>{error}</p>}
+
+        <Input
+          type='password'
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          label='Password'
+          placeholder='Enter your password'
+          required
+        />
+
+        {error && (<p className='text-red-500'>{error}</p>)}
         <button type='submit' className='btn-primary'>LOGIN</button>
         <p className='text-[13px] text-slate-800 mt-3'>
           Don't have an account?{" "}
@@ -40,6 +71,7 @@ const Login = ({setCurrentPage}) => {
             SignUp
           </button>
         </p>
+        
       </form>
     </div>
   )

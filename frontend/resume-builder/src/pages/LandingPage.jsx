@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HERO_IMG from '../assets/hero_section.png'
 import Modal from '../components/Modal';
 import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const LandingPage = () => {
           <h2 className='text-2xl font-bold text-center mb-12'>
             Features That Make You Shine
           </h2>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 cursor-pointer'>
             <div className='bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition'>
               <h3 className='text-lg font-semibold mb-3'>Easy Editing</h3>
               <p className='text-gray-600'>
