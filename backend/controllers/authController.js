@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 //Generate JWT Token
 const generateToken = (userId) => {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, {
+    return jwt.sign({ id: userId }, process.env.JWT_SECRET, {// Tạo token với key là "id"
         expiresIn: '7d',
     });
 };

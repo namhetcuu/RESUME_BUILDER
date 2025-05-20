@@ -61,6 +61,7 @@ const ResumeSchema = new mongoose.Schema(
                 progress: String,
             },
         ],
+        interests: [String],
 
     },
     {
