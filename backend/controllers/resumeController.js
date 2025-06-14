@@ -92,6 +92,7 @@ const createResume = async (req, res) => {
 //@access  Private
 const getUserResumes = async (req, res) => {
     try {
+        //Tìm tất cả bản resume có userId trùng với người dùng hiện tại (req.user._id).Sắp xếp theo thời gian cập nhật gần nhất (updatedAt: -1).
         const resumes = await Resume.find({ userId: req.user._id }).sort({ updatedAt: -1});
         res.status(200).json(resumes);
     } catch (error) {
@@ -119,6 +120,7 @@ const getResumeById = async (req, res) => {
 //@access  Private
 const updateResume = async (req, res) => {
     try {
+        //Tìm đúng bản CV mà người dùng muốn sửa.Chỉ cho phép người sở hữu CV đó thực hiện thay đổi.
         const resume = await Resume.findOne({
             _id: req.params.id,
             userId: req.user._id,
@@ -159,8 +161,13 @@ const deleteResume = async (req, res) => {
         const uploadsFolder = path.join(__dirname, '..' ,'uploads');
         const baseUrl = `${req.protocol}://${req.get('host')}`;
 
+        //Kiểm tra nếu resume.thumbnailLink tồn tại(Xóa ảnh đại diện (thumbnail))
         if(resume.thumbnailLink) {
+            //Dùng path.basename() để lấy tên file cuối cùng từ URL:
+            //VD: "http://localhost:5000/uploads/1718123456789-profile.jpg"
+            //👉 basename = "1718123456789-profile.jpg"
             const oldThumbnail = path.join(uploadsFolder, path.basename(resume.thumbnailLink));
+            //Dùng fs.existsSync() để đảm bảo file có tồn tại.Dùng fs.unlinkSync() để xóa file thật khỏi ổ cứng
             if(fs.existsSync(oldThumbnail)) fs.unlinkSync(oldThumbnail);
         }
         if(resume.profileInfo?.profilePreviewUrl){
@@ -177,8 +184,6 @@ const deleteResume = async (req, res) => {
         }
         res.json({ message: 'Resume deleted successfully' });
  
-
-        res.status(200).json({ message: 'Resume deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting resume', error: error.message });
     }
