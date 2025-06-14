@@ -15,7 +15,7 @@ const protect = async (req,res,next) => {
 
             // Tìm người dùng trong cơ sở dữ liệu bằng id lấy được từ token.
             //Gắn thông tin người dùng vào req.user để các middleware/route sau có thể sử dụng.
-            //Bỏ qua trường password để không gửi mật khẩu ra ngoài.
+            //Bỏ qua trường password để không gửi mật khẩu ra ngoài(-password).
             req.user = await User.findById(decoded.id).select('-password');
 
             //Gọi tiếp middleware tiếp theo trong chuỗi xử lý Express (cho phép tiếp tục xử lý route).

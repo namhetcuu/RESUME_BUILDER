@@ -11,7 +11,7 @@ router.get('/', protect, getUserResumes); // Get all resumes for the logged-in u
 router.get('/:id', protect, getResumeById); // Get a specific resume by ID
 router.put('/:id', protect, updateResume); // Update a specific resume by ID
 
-router.put('/:id', protect, uploadResumeImages); // Delete a specific resume by ID
+router.put('/:id/upload-images', protect, uploadResumeImages); // 
 
 router.delete('/:id', protect, deleteResume); // Delete a specific resume by ID
 
