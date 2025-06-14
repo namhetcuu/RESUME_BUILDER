@@ -23,14 +23,16 @@ app.use(
 // Connect to MongoDB
 connectDB();
 
-// Middleware
+// Middleware xử lý JSON
+//Cho phép Express tự động parse các request có content-type application/json.
+//Tức là bạn có thể nhận req.body trong các route như /register.
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
 
-// Serve static files from the "uploads" directory
+// upload ảnh, file sẽ được lưu vào thư mục uploads.
 app.use("/uploads", express.static(path.join(__dirname, "uploads"), {
     setHeaders: (res, path) => {
         res.set("Access-Control-Allow-Origin", "http://localhost:5173");

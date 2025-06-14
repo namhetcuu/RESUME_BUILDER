@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 
 //Generate JWT Token
 const generateToken = (userId) => {
-    return jwt.sign({ id: userId }, process.env.JWT_SECRET, {// Tạo token với key là "id"
+    return jwt.sign({ id: userId }, 
+        process.env.JWT_SECRET, {// Tạo token với key là "id"
         expiresIn: '7d',
     });
 };
@@ -22,7 +23,7 @@ const registerUser = async(req,res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
         // Hash password
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(10);//tạo salt ngẫu nhiên với độ phức tạp 10.
         const hashedPassword = await bcrypt.hash(password, salt);
         // Create new user
         const user = await User.create({
