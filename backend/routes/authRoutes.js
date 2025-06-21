@@ -9,7 +9,7 @@ router.post('/register', registerUser);// Register a new user
 router.post('/login', loginUser);// Login a user
 router.get('/profile', protect, getUserProfile);// Get user profile
 
-router.post('/upload-image', upload.single('image'), async (req, res) => {
+router.post('/upload-images', upload.single('image'), async (req, res) => {
     if(!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
