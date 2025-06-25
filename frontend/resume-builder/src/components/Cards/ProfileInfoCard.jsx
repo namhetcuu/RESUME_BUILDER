@@ -13,7 +13,7 @@ const ProfileInfoCard = () => {
   };
   return (
     user && (
-      <div className="flex items-center">
+      <div className="flex items-center md:pr-10 pr-2">
         <img
           src={user.profileImageUrl}
           alt=""

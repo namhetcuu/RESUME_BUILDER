@@ -71,7 +71,7 @@ const WorkExperienceForm = ({
               ></textarea>
             </div>
 
-            {WorkExperienceForm.length > 1 && (
+            {workExperience.length > 1 && (
               <button
                 type="button"
                 className="absolute top-3 right-3 text-sm hover:underline cursor-pointer text-red-600"
